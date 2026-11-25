@@ -710,6 +710,7 @@
     <string name="saved_measurements_message">%1$d mesure(s) enregistrée(s)</string>
     <!-- Informations générales -->
     <string name="bt_info_step_on_scale">Merci de montrer pieds-nus sur la balance</string>
+    <string name="bt_info_scale_ready">Balance prête : montez dessus maintenant</string>
     <string name="bt_info_suggest_create_new_user">Pour l\'ensemble des fonctionnalité, créer un nouveau profil sur la balance.</string>
     <string name="bt_info_register_new_user_started">Création d\'un nouveau profil sur la balance …</string>
     <string name="bt_info_no_mapping_creating_user">Pas de liaison trouvée ; création en cours d\'un nouveau profil sur la balance …</string>
@@ -882,4 +883,17 @@
     <string name="bt_hs2s_missing_device_key">Wyze Scale : clé de l\'appareil non configurée. Accédez aux paramètres Bluetooth pour la renseigner.</string>
     <string name="bt_hs2s_wrong_device_key">Echec de l\'authentification de la balance: la clé de l\'appareil ne correspond pas à cette balance.</string>
     <string name="bt_hs2s_auth_failed">Authentification rejetée par la balance.</string>
+    <!-- Beurer BF990 -->
+    <string name="beurer_bf990_config_description">La balance mémorise jusqu\'à 8 personnes. openScale relie votre profil à un utilisateur de la balance grâce à un code de consentement conservé sur ce téléphone. N\'enregistrez pas la même personne dans l\'application Beurer en plus.</string>
+    <string name="beurer_bf990_section_maintenance">Maintenance</string>
+    <string name="beurer_bf990_delete_user">Supprimer mon utilisateur de la balance</string>
+    <string name="beurer_bf990_delete_user_desc">À la prochaine connexion, supprime l\'utilisateur de la balance relié au profil openScale actuel. Les autres personnes sont conservées, ainsi que les mesures enregistrées dans openScale.</string>
+    <string name="beurer_bf990_action_delete">Supprimer</string>
+    <string name="beurer_bf990_factory_reset">Réinitialiser la balance</string>
+    <string name="beurer_bf990_factory_reset_desc">À la prochaine connexion, efface tous les utilisateurs de la balance et son appairage. Ensuite, supprimez la balance dans les paramètres Bluetooth d\'Android puis appairez-la à nouveau. Les mesures enregistrées dans openScale sont conservées.</string>
+    <string name="beurer_bf990_action_pending">S\'exécute à la prochaine connexion : réveillez la balance en la touchant, puis connectez-vous.</string>
+    <string name="beurer_bf990_info_user_deleted">Utilisateur de la balance supprimé.</string>
+    <string name="beurer_bf990_warn_user_delete_failed">La balance a refusé de supprimer l\'utilisateur (code %1$d).</string>
+    <string name="beurer_bf990_info_factory_reset_sent">Réinitialisation envoyée. Supprimez la balance dans les paramètres Bluetooth d\'Android, puis appairez-la à nouveau.</string>
+    <string name="beurer_bf990_error_factory_reset_unavailable">Cette balance ne propose pas la commande de réinitialisation ; rien n\'a été modifié.</string>
 </resources>

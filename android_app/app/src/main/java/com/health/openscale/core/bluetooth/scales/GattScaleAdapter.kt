@@ -249,6 +249,14 @@ class GattScaleAdapter(
         override fun setNotifyOn(service: UUID, characteristic: UUID) {
             opQueue.trySend {
                 val p = currentPeripheral ?: return@trySend
+                // Handlers subscribe to optional characteristics (battery level, ...) that some
+                // devices only offer for reading; there is no CCC descriptor to write then.
+                val notifiable = BluetoothGattCharacteristic.PROPERTY_NOTIFY or BluetoothGattCharacteristic.PROPERTY_INDICATE
+                val ch = p.getCharacteristic(service, characteristic)
+                if (ch == null || ch.properties and notifiable == 0) {
+                    LogManager.d(TAG, "Skip notify on chr=$characteristic svc=$service: not offered by the device")
+                    return@trySend
+                }
                 LogManager.d(TAG, "→ set notify on chr=$characteristic svc=$service")
 
                 val opId = ++nextOpId

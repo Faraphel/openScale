@@ -24,6 +24,7 @@ import com.health.openscale.core.bluetooth.scales.AiLinkBroadcastHandler
 import com.health.openscale.core.bluetooth.scales.ActiveEraBF06Handler
 import com.health.openscale.core.bluetooth.scales.AfuB1Handler
 import com.health.openscale.core.bluetooth.scales.BeurerBF450Handler
+import com.health.openscale.core.bluetooth.scales.BeurerBf990Handler
 import com.health.openscale.core.bluetooth.scales.BeurerSanitasHandler
 import com.health.openscale.core.bluetooth.scales.BodyConnectHandler
 import com.health.openscale.core.bluetooth.scales.BodyPod2Handler
@@ -225,6 +226,7 @@ object ScaleCatalog {
         device("Latin-S") claimedBy PicoocHandler::class.java,
         device("PICOOC-L") claimedBy PicoocBroadcastHandler::class.java,
         device("Beurer BF450") claimedBy BeurerBF450Handler::class.java,
+        device("BF990") claimedBy BeurerBf990Handler::class.java,
         device("BIA SCALE", SERVICE_FFB0) claimedBy TaylorBIAHandler::class.java,
         device("meditive", SERVICE_FFB0) claimedBy TaylorBIAHandler::class.java,
         device("RYFIT") claimedBy RyFitHandler::class.java,

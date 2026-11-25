@@ -141,8 +141,8 @@ open class StandardWeightProfileHandler : ScaleDeviceHandler() {
 
         // 1) Try auto-consent from persisted mapping/consent
         if (!tryAutoConsent(user)) {
-            // 2) No mapping → try to list users via UDS (may be unsupported)
-            requestUdsListAllUsers()
+            // 2) No mapping → ask the scale which users it stores
+            requestScaleUserList()
         }
 
         // Generic hint
@@ -248,6 +248,13 @@ open class StandardWeightProfileHandler : ScaleDeviceHandler() {
         return true
     }
 
+    /**
+     * Asks the scale for its stored users when no mapping exists yet. The default is the UDS
+     * "LIST_ALL_USERS" request; scales with a vendor list endpoint override this and answer
+     * through [presentChooseFromUsers] / [presentCreateOnlyChoice] themselves.
+     */
+    protected open fun requestScaleUserList() = requestUdsListAllUsers()
+
     /** Send UDS "LIST_ALL_USERS". Many devices don't support this; we handle that gracefully. */
     private fun requestUdsListAllUsers() {
         val payload = byteArrayOf(UDS_CP_LIST_ALL_USERS.toByte())
@@ -332,7 +339,12 @@ open class StandardWeightProfileHandler : ScaleDeviceHandler() {
         }
     }
 
-    private fun parseWeightToMeasurement(value: ByteArray): ScaleMeasurement? {
+    /**
+     * Decodes a Weight Measurement (2A9D) into a measurement mapped to the app user that owns
+     * the reported scale slot (userId stays 0xFF when the slot is unmapped or not reported).
+     * Exposed for handlers that assemble multi-frame readings themselves.
+     */
+    protected fun parseWeightToMeasurement(value: ByteArray): ScaleMeasurement? {
         if (value.isEmpty()) return null
         var offset = 0
 
@@ -367,7 +379,15 @@ open class StandardWeightProfileHandler : ScaleDeviceHandler() {
         return m
     }
 
-    private fun parseBodyCompToMeasurement(value: ByteArray): ScaleMeasurement? {
+    /**
+     * Decodes a Body Composition Measurement (2A9C). [pairedWeightKg] is the weight of the
+     * reading the packet belongs to; it is used when the packet carries no weight of its own
+     * (for the LBM/bone derivation and the water-mass → percent conversion at publish time).
+     */
+    protected fun parseBodyCompToMeasurement(
+        value: ByteArray,
+        pairedWeightKg: Float? = pendingMeasurement?.get(MeasurementType.WEIGHT)?.value,
+    ): ScaleMeasurement? {
         if (value.size < 4) return null
         var offset = 0
 
@@ -445,7 +465,7 @@ open class StandardWeightProfileHandler : ScaleDeviceHandler() {
             val w = massKg(u16le(value, offset), isKg); offset += 2
             m[MeasurementType.WEIGHT] = Kg(w)
         } else {
-            pendingMeasurement?.get(MeasurementType.WEIGHT)?.value?.takeIf { it > 0f }?.let { m[MeasurementType.WEIGHT] = Kg(it) }
+            pairedWeightKg?.takeIf { it > 0f }?.let { m[MeasurementType.WEIGHT] = Kg(it) }
         }
 
         if (heightPresent) {

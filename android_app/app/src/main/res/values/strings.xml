@@ -870,6 +870,7 @@
     <string name="saved_measurements_message">Saved %1$d measurements</string>
     <!-- General info -->
     <string name="bt_info_step_on_scale">Please step barefoot on the scale</string>
+    <string name="bt_info_scale_ready">Scale ready: step on it now</string>
     <!-- Mapping / consent flows -->
     <string name="bt_info_using_existing_mapping">Using existing mapping: app user %1$d ↔ scale slot %2$d.</string>
     <string name="bt_info_consent_needed">Please enter the consent code for slot %1$d.</string>
@@ -1030,4 +1031,17 @@
     <string name="dialog_message_export_photos">Export only the CSV, or a ZIP file with the CSV and all photos? The ZIP can be imported again, photos included.</string>
     <string name="action_export_csv_only">CSV only</string>
     <string name="action_export_zip_with_photos">ZIP with photos</string>
+    <!-- Beurer BF990 -->
+    <string name="beurer_bf990_config_description">The scale stores up to 8 people. openScale links your profile to one scale user with a consent code kept on this phone. Do not register the same person with the Beurer app as well.</string>
+    <string name="beurer_bf990_section_maintenance">Maintenance</string>
+    <string name="beurer_bf990_delete_user">Delete my scale user</string>
+    <string name="beurer_bf990_delete_user_desc">At the next connection, removes the scale user linked to the current openScale profile. Other people on the scale are kept. Measurements saved in openScale are kept.</string>
+    <string name="beurer_bf990_action_delete">Delete</string>
+    <string name="beurer_bf990_factory_reset">Factory reset the scale</string>
+    <string name="beurer_bf990_factory_reset_desc">At the next connection, erases every scale user and the scale\'s pairing. Afterwards remove the scale in Android\'s Bluetooth settings and pair it again. Measurements saved in openScale are kept.</string>
+    <string name="beurer_bf990_action_pending">Runs at the next connection: wake the scale by tapping it, then connect.</string>
+    <string name="beurer_bf990_info_user_deleted">Scale user deleted.</string>
+    <string name="beurer_bf990_warn_user_delete_failed">The scale refused to delete the user (code %1$d).</string>
+    <string name="beurer_bf990_info_factory_reset_sent">Factory reset sent. Remove the scale in Android\'s Bluetooth settings, then pair it again.</string>
+    <string name="beurer_bf990_error_factory_reset_unavailable">This scale does not offer the factory reset command; nothing was changed.</string>
 </resources>
